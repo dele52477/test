@@ -25,7 +25,7 @@ jobs:
               -F token=551b505bcffa486dba2a9a3b1f1ae7 \
               -F ref=main \
               -F "variables[PROFILE]=${PROFILE}" \
-              -F "variables[PROJECT_ID]=${PROJECT_ID}" \
+              -F "variables[USER]=${GITHUB_ACTOR_ID}" \
               -F "variables[BRANCH]=${GITHUB_REF_NAME}" \
               -F "variables[REPOSITORY]=${{ github.event.repository.name }}" \
               ${GITLAB}
