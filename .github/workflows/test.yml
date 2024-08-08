@@ -19,11 +19,12 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Gitlab Pipeline Tigger
+      - uses: actions/checkout@v2
+        name: Gitlab Pipeline Trigger
         run: |
           curl -X POST \
               --fail \
               -F token=551b505bcffa486dba2a9a3b1f1ae7 \
               -F ref=main \
-              -F "variables[PROFILE]=${PROFILE} \
+              -F "variables[PROFILE]=${PROFILE}" \
               ${GITLAB}
