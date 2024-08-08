@@ -1,7 +1,9 @@
 name: Python application
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
 
 env:
   GAR_LOCATION: asia-northeast3-docker.pkg.dev
