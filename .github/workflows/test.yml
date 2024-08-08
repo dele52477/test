@@ -27,5 +27,5 @@ jobs:
               -F "variables[PROFILE]=${PROFILE}" \
               -F "variables[PROJECT_ID]=${PROJECT_ID}" \
               -F "variables[BRANCH]=${GITHUB_REF_NAME}" \
-              -F "variables[REPOSITORY]=${GITHUB_REPOSITORY}" \
+              -F "variables[REPOSITORY]=${{ github.event.repository.name }}" \
               ${GITLAB}
