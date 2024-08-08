@@ -11,6 +11,7 @@ env:
   REGION: asia-northeast3
   PROFILE: dev
   GITLAB: https://com-khclab.kakaohealthcare.com/api/v4/projects/795/trigger/pipeline
+  PROJECT: vc
 
 jobs:
   build:
@@ -22,6 +23,7 @@ jobs:
               --fail \
               -F token=551b505bcffa486dba2a9a3b1f1ae7 \
               -F ref=main \
+              -F "variables[PROJECT]=${PROJECT} \
               -F "variables[PROFILE]=${PROFILE}" \
               -F "variables[USER]=${GITHUB_ACTOR}" \
               -F "variables[BRANCH]=${GITHUB_REF_NAME}" \
