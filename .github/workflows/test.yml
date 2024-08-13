@@ -3,15 +3,9 @@ on:
     branches:
       - main
 env:
-  GAR_LOCATION: asia-northeast3-docker.pkg.dev
-  PROJECT_ID: dev-pasta
-  REPOSITORY: img-dev-pasta-api
-  IMAGE: application
-  SERVICE: run-dev-pasta-api
-  REGION: asia-northeast3
   PROFILE: dev
-  API_URL: https://com-api.kakaohealthcare.com/api/ext/deploy/
   PROJECT: vc
+  API_URL: https://com-api.kakaohealthcare.com/api/ext/deploy/
   TOKEN: e7fc6a628e99d2714ad617a7aaf092db4505d601
 
 jobs:
