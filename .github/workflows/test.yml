@@ -12,7 +12,6 @@ env:
   PROFILE: dev
   API_URL: https://com-api.kakaohealthcare.com/api/ext/deploy/
   PROJECT: vc
-  REPO_URL: https://github.com/${GITHUB_REPOSITORY}
 
 jobs:
   build:
@@ -29,7 +28,7 @@ jobs:
                     "project": "'"${PROJECT}"'",
                     "branch": "'"${GITHUB_REF_NAME}"'",
                     "repo": "'"${{ github.event.repository.name }}"'",
-                    "repo_url": "'"${REPO_URL}"'",
+                    "repo_url": "'"${GITHUB_REPOSITORY}"'",
                     "username": "'"${GITHUB_ACTOR}"'"
                   }' \
               ${API_URL}
