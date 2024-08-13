@@ -22,7 +22,7 @@ jobs:
           curl -X POST \
               --fail \
               -H "Content-Type: application/json" \
-              -H "Authorization: [{"key":"Authorization","value":"Token e7fc6a628e99d2714ad617a7aaf092db4505d601","description":"","type":"text","enabled":true,"uuid":"28cf3c84-6741-4a84-9e8d-46d1f9a73f83"}]" \
+              -H "Authorization: Token e7fc6a628e99d2714ad617a7aaf092db4505d601" \
               -d '{
                     "profile": "'"${PROFILE}"'",
                     "project": "'"${PROJECT}"'",
