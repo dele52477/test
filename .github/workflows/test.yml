@@ -10,7 +10,7 @@ env:
   SERVICE: run-dev-pasta-api
   REGION: asia-northeast3
   PROFILE: dev
-  GITLAB: https://com-khclab.kakaohealthcare.com/api/v4/projects/795/trigger/pipeline
+  API_URL: https://com-api.kakaohealthcare.com/api/v4/projects/795/trigger/pipeline
   PROJECT: vc
 
 jobs:
@@ -21,11 +21,13 @@ jobs:
         run: |
           curl -X POST \
               --fail \
-              -F token=551b505bcffa486dba2a9a3b1f1ae7 \
-              -F ref=main \
-              -F "variables[PROJECT]=${PROJECT}" \
-              -F "variables[PROFILE]=${PROFILE}" \
-              -F "variables[USER]=${GITHUB_ACTOR}" \
-              -F "variables[BRANCH]=${GITHUB_REF_NAME}" \
-              -F "variables[REPOSITORY]=${{ github.event.repository.name }}" \
-              ${GITLAB}
+              -H "Content-Type: application/json" \
+              -d '{
+                    "profile": "'"${PROFILE}"'",
+                    "project": "'"${PROJECT}"'",
+                    "branch": "'"${GITHUB_REF_NAME}"'",
+                    "repo": "'"${{ github.event.repository.name }}"'",
+                    "repo_url": "'"https://github.com/${GITHUB_REPOSITORY}"'",
+                    "username": "'"${GITHUB_ACTOR}"'"
+                  }' \
+              ${API_URL}
