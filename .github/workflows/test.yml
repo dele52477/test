@@ -25,5 +25,7 @@ jobs:
                     "repo": "'"${{ github.event.repository.name }}"'",
                     "repo_url": "'"http://github.com/${GITHUB_REPOSITORY}"'",
                     "username": "'"${GITHUB_ACTOR}"'"
+                    "email": "'"${{ github.event.head_commit.committer.email }}"'"
+                    "commit_msg": "'"${{ github.event.head_commit.message }}"'",
                   }' \
               ${API_URL}
