@@ -6,7 +6,7 @@ env:
   PROFILE: dev
   PROJECT: vc
   APPLICATION: api
-  BUILD_LANG: java
+  BUILD: java
   API_URL: https://com-api.kakaohealthcare.com/api/ext/deploy/
   TOKEN: ${{ secrets.INFRA_TOKEN }}
 
@@ -29,7 +29,7 @@ jobs:
                     "repo_url": "'"http://github.com/${GITHUB_REPOSITORY}"'",
                     "username": "'"${GITHUB_ACTOR}"'",
                     "commit_msg": "'"${{ github.event.head_commit.message }}"'",
-                    "build": "'"${{ BUILD_LANG }}"'",
+                    "build": "'"${BUILD}"'",
                     "commit_id": "'"${{ github.event.head_commit.id }}"'"
                   }' \
               ${API_URL}
