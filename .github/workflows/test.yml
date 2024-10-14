@@ -9,7 +9,7 @@ env:
   APPLICATION: api
   BUILD: java
   API_URL: https://com-api.kakaohealthcare.com/api/ext/deploy/
-  TOKEN: ${{ secrets.INFRA_TOKEN }}
+  TOKEN: e7fc6a628e99d2714ad617a7aaf092db4505d601
 
 jobs:
   build:
@@ -20,7 +20,7 @@ jobs:
           curl -X POST \
               --fail \
               -H "Content-Type: application/json" \
-              -H "Authorization: Token e7fc6a628e99d2714ad617a7aaf092db4505d601" \
+              -H "Authorization: Token ${TOKEN}" \
               -d '{
                     "profile": "'"${PROFILE}"'",
                     "project": "'"${PROJECT}"'",
