@@ -22,4 +22,21 @@ jobs:
         run: |
           COMMIT_ID=$(git rev-parse HEAD)
           COMMIT_MESSAGE=$(git log -1 --pretty=%B) 
-          echo "Latest Commit ID: $COMMIT_ID / $COMMIT_MESSAGE"
+          
+          curl -X POST \
+              --fail \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Token ${TOKEN}" \
+              -d '{
+                    "profile": "'"${PROFILE}"'",
+                    "project": "'"${PROJECT}"'",
+                    "application": "'"${APPLICATION}"'",
+                    "branch": "'"${GITHUB_REF_NAME}"'",
+                    "repo": "'"${{ github.event.repository.name }}"'",
+                    "repo_url": "'"http://github.com/${GITHUB_REPOSITORY}"'",
+                    "username": "'"${GITHUB_ACTOR}"'",
+                    "commit_msg": "'"${COMMIT_MESSAGE}"'",
+                    "build": "'"${BUILD}"'",
+                    "commit_id": "'"${COMMIT_ID}"'",
+                  }' \
+              ${API_URL}
