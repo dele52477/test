@@ -21,20 +21,4 @@ jobs:
 
       - name: Gitlab Pipeline Trigger
         run: |          
-          curl -X POST \
-              --fail \
-              -H "Content-Type: application/json" \
-              -H "Authorization: Token e7fc6a628e99d2714ad617a7aaf092db4505d601" \
-              -d '{
-                    "profile": "'"${PROFILE}"'",
-                    "project": "'"${PROJECT}"'",
-                    "application": "'"${APPLICATION}"'",
-                    "branch": "'"${GITHUB_REF_NAME}"'",
-                    "repo": "'"${{ github.event.repository.name }}"'",
-                    "repo_url": "'"http://github.com/${GITHUB_REPOSITORY}"'",
-                    "username": "'"${GITHUB_ACTOR}"'",
-                    "commit_msg": "'"${COMMIT_MESSAGE}"'",
-                    "build": "'"${BUILD}"'",
-                    "commit_id": "'"${COMMIT_ID}"'",
-                  }' \
-              ${API_URL}
+          echo "'"${PROFILE}"'"
