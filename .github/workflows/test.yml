@@ -20,7 +20,7 @@ jobs:
           curl -X POST \
               --fail \
               -H "Content-Type: application/json" \
-              -H "Authorization: Token ${{ secrets.INFRA_TOKEN }}" \
+              -H "Authorization: Token e7fc6a628e99d2714ad617a7aaf092db4505d601" \
               -d '{
                     "profile": "'"${PROFILE}"'",
                     "project": "'"${PROJECT}"'",
