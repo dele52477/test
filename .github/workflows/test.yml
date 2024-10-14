@@ -1,7 +1,8 @@
+name: deploy api (Gitlab TEST)
+
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
+
 env:
   PROFILE: dev
   PROJECT: vc
@@ -9,13 +10,18 @@ env:
   BUILD: java
   API_URL: https://com-api.kakaohealthcare.com/api/ext/deploy/
   TOKEN: ${{ secrets.INFRA_TOKEN }}
-
+  COMMIT_ID: aaa
+  COMMIT_MESSAGE: bbb
+  
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Gitlab Pipeline Trigger
-        run: |
+        run: |          
           curl -X POST \
               --fail \
               -H "Content-Type: application/json" \
@@ -28,8 +34,8 @@ jobs:
                     "repo": "'"${{ github.event.repository.name }}"'",
                     "repo_url": "'"http://github.com/${GITHUB_REPOSITORY}"'",
                     "username": "'"${GITHUB_ACTOR}"'",
-                    "commit_msg": "'"${{ github.event.head_commit.message }}"'",
+                    "commit_msg": "'"${COMMIT_MESSAGE}"'",
                     "build": "'"${BUILD}"'",
-                    "commit_id": "'"${{ github.event.head_commit.id }}"'"
+                    "commit_id": "'"${COMMIT_ID}"'"
                   }' \
               ${API_URL}
