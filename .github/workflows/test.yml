@@ -21,4 +21,4 @@ jobs:
 
       - name: Gitlab Pipeline Trigger
         run: |          
-          echo "'"${PROFILE}"'"
+          echo "${GITHUB_REF_NAME} / ${{ github.event.repository.name }} / http://github.com/${GITHUB_REPOSITORY} / ${GITHUB_ACTOR} / ${BUILD} "
