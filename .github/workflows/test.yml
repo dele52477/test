@@ -17,6 +17,8 @@ jobs:
     steps:
       - name: Gitlab Pipeline Trigger
         run: |
+          COMMIT_ID=$(git rev-parse HEAD)
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)  
           curl -X POST \
               --fail \
               -H "Content-Type: application/json" \
@@ -29,8 +31,8 @@ jobs:
                     "repo": "'"${{ github.event.repository.name }}"'",
                     "repo_url": "'"http://github.com/${GITHUB_REPOSITORY}"'",
                     "username": "'"${GITHUB_ACTOR}"'",
-                    "commit_msg": "'"${{ github.event.workflow_run.head_commit.message }}"'",
+                    "commit_msg": "'"${COMMIT_MESSAGE}"'",
                     "build": "'"${BUILD}"'",
-                    "commit_id": "'"${{ github.event.workflow_run.head_commit.id }}"'"
+                    "commit_id": "'"${COMMIT_ID}"'",
                   }' \
               ${API_URL}
