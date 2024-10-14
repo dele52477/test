@@ -20,7 +20,7 @@ jobs:
           curl -X POST \
               --fail \
               -H "Content-Type: application/json" \
-              -H "Authorization: Token ${{ TOKEN }}" \
+              -H "Authorization: Token "${TOKEN}"" \
               -d '{
                     "profile": "'"${PROFILE}"'",
                     "project": "'"${PROJECT}"'",
