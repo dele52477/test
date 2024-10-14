@@ -17,11 +17,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        run: |
-          COMMIT_ID=$(git rev-parse HEAD)
-          COMMIT_MESSAGE=$(git log -1 --pretty=%B) 
 
       - name: Gitlab Pipeline Trigger
         run: |
           COMMIT_ID=$(git rev-parse HEAD)
-          echo "Latest Commit ID: $COMMIT_ID"
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B) 
+          echo "Latest Commit ID: $COMMIT_ID / $COMMIT_MESSAGE"
