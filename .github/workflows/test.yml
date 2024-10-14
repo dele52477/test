@@ -1,24 +1,35 @@
-name: deploy api (Gitlab TEST)
-
 on:
-  workflow_dispatch:
-
+  push:
+    branches:
+      - main
 env:
   PROFILE: dev
   PROJECT: vc
   APPLICATION: api
   BUILD: java
   API_URL: https://com-api.kakaohealthcare.com/api/ext/deploy/
-  TOKEN: e7fc6a628e99d2714ad617a7aaf092db4505d601
-  COMMIT_ID: aaa
-  COMMIT_MESSAGE: bbb
+  TOKEN: ${{ secrets.INFRA_TOKEN }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
       - name: Gitlab Pipeline Trigger
-        run: |          
-          echo "${GITHUB_REF_NAME} / ${{ github.event.repository.name }} / http://github.com/${GITHUB_REPOSITORY} / ${GITHUB_ACTOR} / ${BUILD} "
+        run: |
+          curl -X POST \
+              --fail \
+              -H "Content-Type: application/json" \
+              -H "Authorization: Token ${TOKEN}" \
+              -d '{
+                    "profile": "'"${PROFILE}"'",
+                    "project": "'"${PROJECT}"'",
+                    "application": "'"${APPLICATION}"'",
+                    "branch": "'"${GITHUB_REF_NAME}"'",
+                    "repo": "'"${{ github.event.repository.name }}"'",
+                    "repo_url": "'"http://github.com/${GITHUB_REPOSITORY}"'",
+                    "username": "'"${GITHUB_ACTOR}"'",
+                    "commit_msg": "'"${{ github.event.head_commit.message }}"'",
+                    "build": "'"${BUILD}"'",
+                    "commit_id": "'"${{ github.event.head_commit.id }}"'"
+                  }' \
+              ${API_URL}
