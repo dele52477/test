@@ -10,8 +10,6 @@ env:
   BUILD: java
   API_URL: https://com-api.kakaohealthcare.com/api/ext/deploy/
   TOKEN: ${{ secrets.INFRA_TOKEN }}
-  COMMIT_ID: aaa
-  COMMIT_MESSAGE: bbb
   
 jobs:
   build:
@@ -21,7 +19,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Gitlab Pipeline Trigger
-        run: |          
+        run: |
+          COMMIT_ID=$(git rev-parse HEAD)
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
           curl -X POST \
               --fail \
               -H "Content-Type: application/json" \
