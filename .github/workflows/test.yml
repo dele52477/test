@@ -32,7 +32,7 @@ jobs:
                     "application": "'"${APPLICATION}"'",
                     "branch": "'"${GITHUB_REF_NAME}"'",
                     "repo": "'"${{ github.event.repository.name }}"'",
-                    "repo_url": "'"http://github.com/${GITHUB_REPOSITORY}"'",
+                    "repo_url": "'"https://github.com/${GITHUB_REPOSITORY}"'",
                     "username": "'"${GITHUB_ACTOR}"'",
                     "commit_msg": "'"${COMMIT_MESSAGE}"'",
                     "build": "'"${BUILD}"'",
