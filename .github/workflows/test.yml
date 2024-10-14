@@ -29,8 +29,8 @@ jobs:
                     "repo": "'"${{ github.event.repository.name }}"'",
                     "repo_url": "'"http://github.com/${GITHUB_REPOSITORY}"'",
                     "username": "'"${GITHUB_ACTOR}"'",
-                    "commit_msg": "'"${{ github.event.head_commit.message }}"'",
+                    "commit_msg": "'"${{ github.event.workflow_run.head_commit.message }}"'",
                     "build": "'"${BUILD}"'",
-                    "commit_id": "'"${{ github.event.head_commit.id }}"'"
+                    "commit_id": "'"${{ github.event.workflow_run.head_commit.id }}"'"
                   }' \
               ${API_URL}
