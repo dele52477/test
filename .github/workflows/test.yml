@@ -1,19 +1,32 @@
-name: deploy api (Gitlab TEST)
+name: Deploy to GCP dev Manually
 
 on:
+  push:
+    branches:
+      - dev
   workflow_dispatch:
 
 env:
+  GAR_LOCATION: asia-northeast3-docker.pkg.dev
+  PROJECT_ID: dev-pasta
+  REPOSITORY: img-dev-pasta-webview
+  IMAGE: application
+  SERVICE: run-dev-pasta-webview
+  REGION: asia-northeast3
   PROFILE: dev
   PROJECT: vc
-  APPLICATION: api
-  BUILD: java
+  APPLICATION: webview
+  BUILD: node
+  TOKEN: e7fc6a628e99d2714ad617a7aaf092db4505d601
   API_URL: https://com-api.kakaohealthcare.com/api/ext/deploy/
-  TOKEN: ${{ secrets.INFRA_TOKEN }}
-  
+  COMMIT_ID: default
+  COMMIT_MESSAGE: default
+
 jobs:
-  build:
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -21,7 +34,7 @@ jobs:
       - name: Gitlab Pipeline Trigger
         run: |
           COMMIT_ID=$(git rev-parse HEAD)
-          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)          
           curl -X POST \
               --fail \
               -H "Content-Type: application/json" \
@@ -31,7 +44,7 @@ jobs:
                     "project": "'"${PROJECT}"'",
                     "application": "'"${APPLICATION}"'",
                     "branch": "'"${GITHUB_REF_NAME}"'",
-                    "repo": "'"${{ github.event.repository.name }}"'",
+                    "repo": "'"pasta-webview"'",
                     "repo_url": "'"https://github.com/${GITHUB_REPOSITORY}"'",
                     "username": "'"${GITHUB_ACTOR}"'",
                     "commit_msg": "'"${COMMIT_MESSAGE}"'",
