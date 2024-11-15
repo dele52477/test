@@ -34,7 +34,7 @@ jobs:
       - name: Gitlab Pipeline Trigger
         run: |
           COMMIT_ID=$(git rev-parse HEAD)
-          COMMIT_MESSAGE=$(git log -1 --pretty=%B | sed -n -e '1p' | awk '{printf "%s\\n", $0}' | sed 's/"/\\"/g')
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B | sed -n -e '1p' | awk '{printf "%s\\n", $0}' | sed 's/[^[:print:]]//g' | sed 's/"/\\"/g')
           curl -X POST \
               --fail \
               -H "Content-Type: application/json" \
